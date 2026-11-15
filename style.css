@@ -1,0 +1,339 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    background:
+        radial-gradient(circle at 50% 15%, #172d58, transparent 45%),
+        #070b16;
+    color: #eaf2ff;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.robot {
+    width: 100%;
+    max-width: 650px;
+    padding: 35px;
+    text-align: center;
+    background: linear-gradient(145deg, #121e35, #0b1222);
+    border: 1px solid #29436c;
+    border-radius: 28px;
+    box-shadow: 0 0 60px #1765ff20;
+}
+
+.robot h1 {
+    font-size: 32px;
+    letter-spacing: 5px;
+    color: #8bbaff;
+    text-shadow: 0 0 20px #398cff;
+    margin-bottom: 30px;
+}
+
+.face {
+    width: 210px;
+    height: 175px;
+    margin: 0 auto 25px;
+    border-radius: 45% 45% 38% 38%;
+    background: linear-gradient(145deg, #263e65, #101a30);
+    border: 3px solid #588df5;
+    box-shadow:
+        0 0 25px #398cff80,
+        inset 0 0 25px #398cff30;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    animation: float 4s ease-in-out infinite;
+}
+
+.eyes {
+    display: flex;
+    gap: 55px;
+}
+
+.eye {
+    width: 23px;
+    height: 30px;
+    border-radius: 50%;
+    background: #66d9ff;
+    box-shadow: 0 0 20px #36bfff;
+    animation: blink 4s infinite;
+}
+
+.mouth {
+    width: 48px;
+    height: 9px;
+    border-radius: 20px;
+    background: #65cfff;
+    box-shadow: 0 0 15px #36bfff;
+}
+
+.robot h2 {
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-size: 23px;
+}
+
+.robot > p {
+    color: #9eafd0;
+    margin-bottom: 25px;
+}
+
+.chat {
+    text-align: left;
+    background: #0a1324;
+    border: 1px solid #263c60;
+    border-radius: 18px;
+    padding: 18px;
+}
+
+#messages {
+    min-height: 150px;
+    max-height: 300px;
+    overflow-y: auto;
+    color: #dce9ff;
+    line-height: 1.7;
+    padding: 10px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.message {
+    margin: 12px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.message strong {
+    color: #78baff;
+}
+
+.message.user {
+    text-align: right;
+}
+
+.message.user strong {
+    color: #a88bff;
+}
+
+.chat input {
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+    background: #172540;
+    border: 1px solid #34517e;
+    border-radius: 12px;
+    outline: none;
+    color: white;
+    font-size: 15px;
+}
+
+.chat input:focus {
+    border-color: #63aaff;
+    box-shadow: 0 0 12px #398cff50;
+}
+
+.chat button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background: linear-gradient(100deg, #2378ee, #7651dc);
+    transition: 0.2s;
+}
+
+.chat button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px #398cff70;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-9px);
+    }
+}
+
+@keyframes blink {
+    0%, 45%, 49%, 100% {
+        transform: scaleY(1);
+    }
+    47% {
+        transform: scaleY(0.1);
+    }
+}
+
+@media (max-width: 500px) {
+    .robot {
+        padding: 20px;
+    }
+
+    .robot h1 {
+        font-size: 25px;
+    }
+
+    .face {
+        width: 175px;
+        height: 150px;
+    }
+}
+
+/* ZENIX ROBOT STATES */
+
+/* Thinking */
+.robot.thinking .eyes {
+    animation: eyeScan 1.2s ease-in-out infinite alternate;
+}
+
+.robot.thinking .eye {
+    box-shadow: 0 0 25px #36bfff;
+}
+
+/* Speaking */
+.robot.speaking .mouth {
+    animation: mouthTalk 0.2s ease-in-out infinite alternate;
+}
+
+/* Listening */
+.robot.listening .face {
+    border-color: #36dc91;
+    box-shadow: 0 0 35px #36dc9180;
+}
+
+/* Thinking animation */
+@keyframes eyeScan {
+    from {
+        transform: translateX(-8px);
+    }
+    to {
+        transform: translateX(8px);
+    }
+}
+
+/* Talking animation */
+@keyframes mouthTalk {
+    from {
+        height: 5px;
+        width: 35px;
+    }
+    to {
+        height: 24px;
+        width: 45px;
+    }
+}
+
+/* =================================
+   ZENIX - REALISTIC ROBOT FACE
+================================= */
+
+.robot .face {
+    position: relative;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.robot .eyes {
+    display: flex;
+    justify-content: center;
+    gap: 55px;
+    transition: transform 0.5s ease;
+}
+
+.robot .eye {
+    transform-origin: center;
+    animation: zenixBlink 5s infinite;
+    transition: box-shadow 0.3s;
+}
+
+/* Natural smiling mouth */
+.robot .mouth {
+    width: 48px;
+    height: 17px;
+    background: transparent;
+    border: none;
+    border-bottom: 4px solid #65cfff;
+    border-radius: 0 0 50% 50%;
+    transition: all 0.25s ease;
+    box-shadow: 0 5px 12px #36bfff30;
+}
+
+/* Thinking */
+.robot.thinking .eyes {
+    animation: zenixLook 1.5s ease-in-out infinite alternate;
+}
+
+.robot.thinking .eye {
+    box-shadow: 0 0 25px #36bfff;
+}
+
+/* Speaking */
+.robot.speaking .mouth {
+    width: 38px;
+    height: 12px;
+    background: #65cfff;
+    border: none;
+    border-radius: 50%;
+    animation: zenixTalk 0.22s ease-in-out infinite alternate;
+    box-shadow: 0 0 18px #36bfff;
+}
+
+/* Listening */
+.robot.listening .face {
+    border-color: #36dc91;
+    box-shadow: 0 0 35px #36dc9190;
+}
+
+.robot.listening .eye {
+    box-shadow: 0 0 25px #36dc91;
+}
+
+/* Eye blinking */
+@keyframes zenixBlink {
+    0%, 43%, 47%, 100% {
+        transform: scaleY(1);
+    }
+
+    45% {
+        transform: scaleY(0.08);
+    }
+}
+
+/* Looking around */
+@keyframes zenixLook {
+    from {
+        transform: translateX(-7px);
+    }
+
+    to {
+        transform: translateX(7px);
+    }
+}
+
+/* Talking mouth */
+@keyframes zenixTalk {
+    from {
+        height: 5px;
+        width: 25px;
+    }
+
+    to {
+        height: 23px;
+        width: 40px;
+    }
+}
